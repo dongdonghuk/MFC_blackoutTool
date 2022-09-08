@@ -1,4 +1,6 @@
 #pragma once
+
+
 class DicomImg
 {
 public:
@@ -8,6 +10,8 @@ public:
 
 	CString m_dcmName;
 	CString m_dcmPath;
+	CString m_modelName;
+
 	int m_nFrame;
 	CPoint m_pt;
 	double m_dAligmentRate;

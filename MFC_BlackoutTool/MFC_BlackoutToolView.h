@@ -3,6 +3,8 @@
 //
 
 #pragma once
+#include "MFC_BlackoutToolDoc.h"
+
 
 
 class CMFCBlackoutToolView : public CView
@@ -46,6 +48,7 @@ public:
 //	afx_msg void OnDrawRect();
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 //	afx_msg void OnDrawMouse();
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 };
 
 #ifndef _DEBUG  // MFC_BlackoutToolView.cpp의 디버그 버전

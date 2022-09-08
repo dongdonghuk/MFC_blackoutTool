@@ -6,6 +6,7 @@
 #define IDP_OLE_INIT_FAILED             100
 #define IDR_MAINFRAME                   128
 #define IDR_MFCBlackoutToolTYPE         130
+#define IDD_CBtnFormView                310
 #define ID_DICOM_LOAD                   32771
 #define IDM_DICOM_LOAD                  32772
 #define ID_DRAW_RECTANGLE               32773
@@ -18,14 +19,18 @@
 #define IDM_DRAW_MOUSE                  32780
 #define ID_DICOM_SAVE                   32781
 #define IDM_JSON_SAVE                   32782
+#define ID_DELETE_UNDO                  32783
+#define ID_DELETE_ALL                   32784
+#define IDM_DELETE_UNDO                 32785
+#define IDM_DELETE_ALL                  32786
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        310
-#define _APS_NEXT_COMMAND_VALUE         32783
-#define _APS_NEXT_CONTROL_VALUE         1000
-#define _APS_NEXT_SYMED_VALUE           310
+#define _APS_NEXT_RESOURCE_VALUE        311
+#define _APS_NEXT_COMMAND_VALUE         32787
+#define _APS_NEXT_CONTROL_VALUE         1004
+#define _APS_NEXT_SYMED_VALUE           311
 #endif
 #endif

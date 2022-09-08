@@ -62,4 +62,6 @@ public:
 	afx_msg void OnDrawRect();
 	afx_msg void OnDrawMouse();
 	afx_msg void OnJsonSave();
+	afx_msg void OnDeleteUndo();
+	afx_msg void OnDeleteAll();
 };

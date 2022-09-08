@@ -27,6 +27,8 @@ BEGIN_MESSAGE_MAP(CMFCBlackoutToolDoc, CDocument)
 	ON_COMMAND(IDM_DRAW_RECT, &CMFCBlackoutToolDoc::OnDrawRect)
 	ON_COMMAND(IDM_DRAW_MOUSE, &CMFCBlackoutToolDoc::OnDrawMouse)
 	ON_COMMAND(IDM_JSON_SAVE, &CMFCBlackoutToolDoc::OnJsonSave)
+	ON_COMMAND(IDM_DELETE_UNDO, &CMFCBlackoutToolDoc::OnDeleteUndo)
+	ON_COMMAND(IDM_DELETE_ALL, &CMFCBlackoutToolDoc::OnDeleteAll)
 END_MESSAGE_MAP()
 
 
@@ -158,6 +160,8 @@ void CMFCBlackoutToolDoc::OnDicomLoad()
 		//m_drawTmp.m_nType = 0;
 
 		m_dcmImg.dcmRead(dlg.GetPathName(),dlg.GetFileName());
+
+		m_jsonFile.jsonLoad(m_vCdraw, m_dcmImg.m_dcmPath);
 		UpdateAllViews(NULL);
 	}
 	RemoveMouseMessage();
@@ -193,7 +197,31 @@ BOOL CMFCBlackoutToolDoc::RemoveMouseMessage()
 void CMFCBlackoutToolDoc::OnJsonSave()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	if (!m_vCdraw.empty()) {
+		m_jsonFile.jsonSave(m_vCdraw, m_dcmImg);
+	}
+	RemoveMouseMessage();
+}
 
-	m_jsonFile.jsonSave(m_vCdraw, m_dcmImg.m_dcmPath);
+
+void CMFCBlackoutToolDoc::OnDeleteUndo()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	if (!m_vCdraw.empty())
+	{
+		m_vCdraw.pop_back();
+		UpdateAllViews(NULL);
+	}
+	RemoveMouseMessage();
+}
+
+
+void CMFCBlackoutToolDoc::OnDeleteAll()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	if (!m_vCdraw.empty()) {
+		m_vCdraw.clear();
+		UpdateAllViews(NULL);
+	}
 	RemoveMouseMessage();
 }

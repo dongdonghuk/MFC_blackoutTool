@@ -10,7 +10,6 @@
 #include "MFC_BlackoutTool.h"
 #endif
 
-#include "MFC_BlackoutToolDoc.h"
 #include "MFC_BlackoutToolView.h"
 
 #ifdef _DEBUG
@@ -32,6 +31,7 @@ BEGIN_MESSAGE_MAP(CMFCBlackoutToolView, CView)
 //	ON_COMMAND(IDM_DRAW_RECT, &CMFCBlackoutToolView::OnDrawRect)
 	ON_WM_MOUSEMOVE()
 //	ON_COMMAND(IDM_DRAW_MOUSE, &CMFCBlackoutToolView::OnDrawMouse)
+ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
 // CMFCBlackoutToolView 생성/소멸
@@ -211,11 +211,8 @@ void CMFCBlackoutToolView::OnLButtonUp(UINT nFlags, CPoint point)
 			//ReleaseCapture();
 			ClipCursor(NULL);
 		}
-
 		Invalidate(false);
 	}
-
-
 	CView::OnLButtonUp(nFlags, point);
 }
 
@@ -229,13 +226,19 @@ void CMFCBlackoutToolView::OnMouseMove(UINT nFlags, CPoint point)
 			point.x = (point.x - pDoc->m_dcmImg.m_pt.x) / (pDoc->m_dcmImg.m_dAligmentRate);
 			point.y = (point.y - pDoc->m_dcmImg.m_pt.y) / (pDoc->m_dcmImg.m_dAligmentRate);
 
-
 			pDoc->m_drawTmp.m_vPoint[2] = (Gdiplus::Point(point.x, point.y));
-
 			Invalidate(FALSE);
 		}
 	}
-
 	CView::OnMouseMove(nFlags, point);
 }
 
+
+
+BOOL CMFCBlackoutToolView::OnEraseBkgnd(CDC* pDC)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	return FALSE;
+
+	return CView::OnEraseBkgnd(pDC);
+}

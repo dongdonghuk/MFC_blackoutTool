@@ -26,6 +26,7 @@
 #pragma comment(lib, "dcmtk.lib")
 
 #include "json/json.h"
+#include <afxext.h>
 #pragma comment(lib, "jsoncpp.lib")
 
 using namespace Gdiplus;
