@@ -75,11 +75,14 @@ void DicomImg::dcmRead(CString filePath, CString fileName) {
 	DcmDataset* dataset = DcmFileFormat.getDataset();
 	OFString strColorType;
 	OFString strModelName;
+	OFString strManufacturer;
 
 	dataset->findAndGetOFString(DCM_PhotometricInterpretation, strColorType);
 	dataset->findAndGetOFString(DCM_ManufacturerModelName, strModelName);
+	dataset->findAndGetOFString(DCM_Manufacturer, strManufacturer);
 
 	m_modelName = strModelName.c_str();
+	m_manufacturer = strManufacturer.c_str();
 	
 	// grayscale
 	if (strColorType == "MONOCHROME1" || strColorType == "MONOCHROME2") {

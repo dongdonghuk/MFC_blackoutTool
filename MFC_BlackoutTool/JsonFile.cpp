@@ -13,6 +13,7 @@ void JsonFile::jsonSave(vector<CDraw>const &vCDraw, DicomImg const &dcmImg) {
 	//도형의 개수
 
 	root["model name"] = std::string(CT2CA(dcmImg.m_modelName));
+	root["manufacturer"] = std::string(CT2CA(dcmImg.m_manufacturer));
 	root["rows"] = dcmImg.m_dcmImg.rows;
 	root["columns"] = dcmImg.m_dcmImg.cols;
 	root["count"] = vCDraw.size();

@@ -20,6 +20,7 @@ IMPLEMENT_DYNCREATE(CMainFrame, CFrameWnd)
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
 	ON_WM_SIZE()
+	ON_WM_GETMINMAXINFO()
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -77,6 +78,9 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 		return FALSE;
 	// TODO: CREATESTRUCT cs를 수정하여 여기에서
 	//  Window 클래스 또는 스타일을 수정합니다.
+
+	//상단메뉴 삭제
+	if (NULL != cs.hMenu) { ::DestroyMenu(cs.hMenu);	cs.hMenu = NULL; }
 
 	return TRUE;
 }
@@ -165,4 +169,14 @@ void CMainFrame::OnSize(UINT nType, int cx, int cy)
 	m_wndSplitter2.SetRowInfo(2, rect.bottom / 3, 100);
 	RecalcLayout();
 
+}
+
+
+void CMainFrame::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	lpMMI->ptMinTrackSize.x = 1000;
+	lpMMI->ptMinTrackSize.y = 800;
+
+	CFrameWnd::OnGetMinMaxInfo(lpMMI);
 }

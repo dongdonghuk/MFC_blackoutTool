@@ -11,6 +11,7 @@ public:
 	CString m_dcmName;
 	CString m_dcmPath;
 	CString m_modelName;
+	CString m_manufacturer;
 
 	int m_nFrame;
 	CPoint m_pt;
