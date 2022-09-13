@@ -3,7 +3,7 @@
 
 DicomImg::DicomImg()
 {
-
+	m_dcmImg = NULL;
 }
 
 DicomImg::~DicomImg()

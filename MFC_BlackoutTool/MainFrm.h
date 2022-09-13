@@ -5,6 +5,7 @@
 #pragma once
 #include "CFixedSplitterWnd.h"
 #include "CBtnFormView.h"
+#include "CPresetFormView.h"
 
 
 class CMainFrame : public CFrameWnd
@@ -28,6 +29,10 @@ public:
 // 구현입니다.
 public:
 	virtual ~CMainFrame();
+
+	CFixedSplitterWnd m_wndSplitter1;
+	CFixedSplitterWnd m_wndSplitter2;
+
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
@@ -37,8 +42,7 @@ protected:  // 컨트롤 모음이 포함된 멤버입니다.
 	CToolBar          m_wndToolBar;
 	CStatusBar        m_wndStatusBar;
 
-	CFixedSplitterWnd m_wndSplitter1;
-	CFixedSplitterWnd m_wndSplitter2;
+
 
 // 생성된 메시지 맵 함수
 protected:

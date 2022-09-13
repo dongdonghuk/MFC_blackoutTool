@@ -150,6 +150,17 @@ void CMFCBlackoutToolDoc::OnDicomLoad()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 
+
+	//if ((m_jsonFile.isSaved(m_vCdraw, m_dcmImg.m_dcmPath) == FALSE) && (m_dcmImg.empty() == FALSE))
+	//{
+	//	AfxMessageBox(_T("test"));
+
+	//	if (IDYES == AfxMessageBox(_T("저장하시겠습니까?"), MB_YESNO)) {
+	//		AfxMessageBox(_T("test"));
+	//	}
+	//}
+
+
 	TCHAR szFilter[] = _T("Dicom(*.dcm)|*.dcm|");
 	CFileDialog dlg(TRUE, NULL, NULL, OFN_HIDEREADONLY, szFilter);
 
@@ -162,7 +173,17 @@ void CMFCBlackoutToolDoc::OnDicomLoad()
 		m_dcmImg.dcmRead(dlg.GetPathName(),dlg.GetFileName());
 
 		m_jsonFile.jsonLoad(m_vCdraw, m_dcmImg.m_dcmPath);
-		UpdateAllViews(NULL);
+
+		CPresetFormView *pView = (CPresetFormView*)((CMainFrame*)AfxGetMainWnd())->m_wndSplitter2.GetPane(0, 0);
+
+		pView->m_strManufacturer = m_dcmImg.m_manufacturer;
+		pView->m_strModel = m_dcmImg.m_modelName;
+		pView->m_strSize.Format(_T("%d x %d"), m_dcmImg.m_dcmImg.rows, m_dcmImg.m_dcmImg.cols);
+
+		pView->UpdateData(FALSE);
+
+		//UpdateAllViews(NULL);
+
 	}
 	RemoveMouseMessage();
 
@@ -182,6 +203,7 @@ void CMFCBlackoutToolDoc::OnDrawRect()
 void CMFCBlackoutToolDoc::OnDrawMouse()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+
 	m_nDrawType = IDM_DRAW_MOUSE;
 	RemoveMouseMessage();
 

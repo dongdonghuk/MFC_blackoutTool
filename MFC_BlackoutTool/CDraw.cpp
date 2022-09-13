@@ -28,3 +28,4 @@ void CDraw::Brush(Gdiplus::Graphics& memDC) {
 	memDC.FillPolygon(&myHatchBrush, m_vPoint.data(), 4);
 }
 
+

@@ -10,7 +10,6 @@
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
 
-
 #include <gdiplus.h>
 #pragma comment (lib,"Gdiplus.lib")
 
@@ -27,6 +26,9 @@
 
 #include "json/json.h"
 #include <afxext.h>
+#include <afxwin.h>
+#include <afxext.h>
+#include <afxwin.h>
 #pragma comment(lib, "jsoncpp.lib")
 
 using namespace Gdiplus;

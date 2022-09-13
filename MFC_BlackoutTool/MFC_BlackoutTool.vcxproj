@@ -195,6 +195,7 @@
     <ClInclude Include="CBtnFormView.h" />
     <ClInclude Include="CDraw.h" />
     <ClInclude Include="CFixedSplitterWnd.h" />
+    <ClInclude Include="CPresetFormView.h" />
     <ClInclude Include="DicomImg.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="JsonFile.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="CBtnFormView.cpp" />
     <ClCompile Include="CDraw.cpp" />
     <ClCompile Include="CFixedSplitterWnd.cpp" />
+    <ClCompile Include="CPresetFormView.cpp" />
     <ClCompile Include="DicomImg.cpp" />
     <ClCompile Include="JsonFile.cpp" />
     <ClCompile Include="MainFrm.cpp" />

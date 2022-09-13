@@ -123,18 +123,18 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 
 	CRect rect;
 	GetClientRect(&rect);
-	m_wndSplitter2.CreateView(0, 0, RUNTIME_CLASS(CBtnFormView), CSize(0, 0), pContext);
-	m_wndSplitter2.CreateView(1, 0, RUNTIME_CLASS(CBtnFormView), CSize(0, 0), pContext);
-	m_wndSplitter2.CreateView(2, 0, RUNTIME_CLASS(CBtnFormView), CSize(0, 0), pContext);
+	m_wndSplitter2.CreateView(0, 0, RUNTIME_CLASS(CPresetFormView), CSize(0, 0), pContext);
+	m_wndSplitter2.CreateView(1, 0, RUNTIME_CLASS(CPresetFormView), CSize(0, 0), pContext);
+	m_wndSplitter2.CreateView(2, 0, RUNTIME_CLASS(CPresetFormView), CSize(0, 0), pContext);
 	m_wndSplitter1.CreateView(0, 0, RUNTIME_CLASS(CBtnFormView), CSize(0, 0), pContext);
 	m_wndSplitter1.CreateView(0, 1, RUNTIME_CLASS(CMFCBlackoutToolView), CSize(0, 0), pContext);
 
 
 	m_wndSplitter1.SetColumnInfo(0, 100, 50);
-	m_wndSplitter1.SetColumnInfo(1, rect.right - 350, 50);
-	m_wndSplitter1.SetColumnInfo(2, 250, 50);
+	m_wndSplitter1.SetColumnInfo(1, rect.right - 320, 50);
+	m_wndSplitter1.SetColumnInfo(2, 220, 50);
 
-	m_wndSplitter2.SetRowInfo(0, rect.bottom / 3, 100);
+	m_wndSplitter2.SetRowInfo(0, 200, 100);
 	m_wndSplitter2.SetRowInfo(1, rect.bottom / 3, 100);
 	m_wndSplitter2.SetRowInfo(2, rect.bottom / 3, 100);
 
@@ -161,12 +161,13 @@ void CMainFrame::OnSize(UINT nType, int cx, int cy)
 	GetClientRect(&rect);
 
 	m_wndSplitter1.SetColumnInfo(0, 100, 50);
-	m_wndSplitter1.SetColumnInfo(1, rect.right - 350, 50);
-	m_wndSplitter1.SetColumnInfo(2, 250, 50);
+	m_wndSplitter1.SetColumnInfo(1, rect.right - 320, 50);
+	m_wndSplitter1.SetColumnInfo(2, 220, 50);
 
-	m_wndSplitter2.SetRowInfo(0, rect.bottom / 3, 100);
+	m_wndSplitter2.SetRowInfo(0, 200, 100);
 	m_wndSplitter2.SetRowInfo(1, rect.bottom / 3, 100);
 	m_wndSplitter2.SetRowInfo(2, rect.bottom / 3, 100);
+
 	RecalcLayout();
 
 }
@@ -175,7 +176,7 @@ void CMainFrame::OnSize(UINT nType, int cx, int cy)
 void CMainFrame::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	lpMMI->ptMinTrackSize.x = 1000;
+	lpMMI->ptMinTrackSize.x = 800;
 	lpMMI->ptMinTrackSize.y = 800;
 
 	CFrameWnd::OnGetMinMaxInfo(lpMMI);

@@ -7,7 +7,8 @@
 #include "DicomImg.h"
 #include "CDraw.h"
 #include "JsonFile.h"
-
+//#include "CPresetFormView.h"
+#include "MainFrm.h"
 
 class CMFCBlackoutToolDoc : public CDocument
 {

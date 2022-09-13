@@ -7,6 +7,10 @@
 #define IDR_MAINFRAME                   128
 #define IDR_MFCBlackoutToolTYPE         130
 #define IDD_CBtnFormView                310
+#define IDD_CPresetFormView             311
+#define IDC_DCM_MANUFACTURER            1004
+#define IDC_DCM_MODEL                   1007
+#define IDC_DCM_SIZE                    1008
 #define ID_DICOM_LOAD                   32771
 #define IDM_DICOM_LOAD                  32772
 #define ID_DRAW_RECTANGLE               32773
@@ -28,9 +32,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        311
+#define _APS_NEXT_RESOURCE_VALUE        313
 #define _APS_NEXT_COMMAND_VALUE         32787
-#define _APS_NEXT_CONTROL_VALUE         1004
-#define _APS_NEXT_SYMED_VALUE           311
+#define _APS_NEXT_CONTROL_VALUE         1010
+#define _APS_NEXT_SYMED_VALUE           313
 #endif
 #endif

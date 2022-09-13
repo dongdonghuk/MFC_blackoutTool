@@ -9,7 +9,7 @@ void JsonFile::jsonSave(vector<CDraw>const &vCDraw, DicomImg const &dcmImg) {
 	Json::Value polygon;
 	Json::Value points;
 	Json::Value point;
-	
+
 	//도형의 개수
 
 	root["model name"] = std::string(CT2CA(dcmImg.m_modelName));
@@ -17,7 +17,7 @@ void JsonFile::jsonSave(vector<CDraw>const &vCDraw, DicomImg const &dcmImg) {
 	root["rows"] = dcmImg.m_dcmImg.rows;
 	root["columns"] = dcmImg.m_dcmImg.cols;
 	root["count"] = vCDraw.size();
-	
+
 	for (auto cdraw : vCDraw)
 	{
 		polygon["count"] = cdraw.m_vPoint.size();
@@ -87,4 +87,44 @@ void JsonFile::jsonLoad(vector<CDraw> &vCDraw, CString filePath) {
 			vCDraw.push_back(tmp);
 		}
 	}
+}
+
+BOOL JsonFile::isSaved(vector<CDraw> const &vCDraw, CString filePath) {
+
+
+	//filePath = filePath + _T(".json");
+	//std::ifstream json_file(filePath, std::ios::in);
+
+	//if (!json_file.is_open()) return FALSE;
+
+	//Json::Value root;
+	//Json::Value shapes;
+	//Json::Value points;
+	//Json::Value point;
+
+	//json_file >> root;
+	//json_file.close();
+
+	//shapes = root["shapes"];
+
+	////points = shapes["points"];
+
+	//for (int i = 0; i < root["count"].asInt(); i++) {
+	//	if (shapes[i]["count"].asInt() == 4) {
+
+	//		//tmp.m_nType = 1;
+	//		points.clear();
+	//		points = shapes[i]["points"];
+
+	//		for (int j = 0; j < 4; j++) {
+	//			point.clear();
+	//			point = points[j];
+	//			if (!(vCDraw[i].m_vPoint[j].X == point[0].asInt() && vCDraw[i].m_vPoint[j].Y == point[1].asInt())) {
+	//				return FALSE;
+	//			}
+	//		}
+	//	}
+	//}
+
+	return TRUE;
 }

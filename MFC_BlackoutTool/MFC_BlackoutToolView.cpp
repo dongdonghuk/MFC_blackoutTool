@@ -32,6 +32,8 @@ BEGIN_MESSAGE_MAP(CMFCBlackoutToolView, CView)
 	ON_WM_MOUSEMOVE()
 //	ON_COMMAND(IDM_DRAW_MOUSE, &CMFCBlackoutToolView::OnDrawMouse)
 ON_WM_ERASEBKGND()
+ON_WM_SETCURSOR()
+//ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
 // CMFCBlackoutToolView 생성/소멸
@@ -242,3 +244,33 @@ BOOL CMFCBlackoutToolView::OnEraseBkgnd(CDC* pDC)
 
 	return CView::OnEraseBkgnd(pDC);
 }
+
+
+BOOL CMFCBlackoutToolView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	CMFCBlackoutToolDoc* pDoc = GetDocument();
+
+	HCURSOR hHandCursor;
+	switch (pDoc->m_nDrawType)
+	{
+	case IDM_DRAW_RECT:
+		hHandCursor = ::LoadCursor(NULL, IDC_CROSS);
+
+		break;
+	case IDM_DRAW_MOUSE:
+		hHandCursor = ::LoadCursor(NULL, IDC_ARROW);
+
+		break;
+	default:
+		hHandCursor = ::LoadCursor(NULL, IDC_ARROW);
+
+		break;
+	}
+	SetCursor(hHandCursor);
+
+	return TRUE;
+}
+
+
+

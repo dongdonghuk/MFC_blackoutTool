@@ -6,6 +6,7 @@
 #include "CBtnFormView.h"
 
 
+
 // CBtnFormView
 
 IMPLEMENT_DYNCREATE(CBtnFormView, CFormView)
@@ -30,8 +31,8 @@ END_MESSAGE_MAP()
 
 
 // CBtnFormView 진단
-
 #ifdef _DEBUG
+
 void CBtnFormView::AssertValid() const
 {
 	CFormView::AssertValid();
