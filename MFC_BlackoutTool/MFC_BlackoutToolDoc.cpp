@@ -29,6 +29,7 @@ BEGIN_MESSAGE_MAP(CMFCBlackoutToolDoc, CDocument)
 	ON_COMMAND(IDM_JSON_SAVE, &CMFCBlackoutToolDoc::OnJsonSave)
 	ON_COMMAND(IDM_DELETE_UNDO, &CMFCBlackoutToolDoc::OnDeleteUndo)
 	ON_COMMAND(IDM_DELETE_ALL, &CMFCBlackoutToolDoc::OnDeleteAll)
+	ON_COMMAND(IDM_DIR_LOAD, &CMFCBlackoutToolDoc::OnDirLoad)
 END_MESSAGE_MAP()
 
 
@@ -172,7 +173,7 @@ void CMFCBlackoutToolDoc::OnDicomLoad()
 
 		m_dcmImg.dcmRead(dlg.GetPathName(),dlg.GetFileName());
 
-		m_jsonFile.jsonLoad(m_vCdraw, m_dcmImg.m_dcmPath);
+		m_jsonFile.jsonLoad(m_vCdraw, m_dcmImg);
 
 		CPresetFormView *pView = (CPresetFormView*)((CMainFrame*)AfxGetMainWnd())->m_wndSplitter2.GetPane(0, 0);
 
@@ -182,7 +183,7 @@ void CMFCBlackoutToolDoc::OnDicomLoad()
 
 		pView->UpdateData(FALSE);
 
-		//UpdateAllViews(NULL);
+		UpdateAllViews(NULL);
 
 	}
 	RemoveMouseMessage();
@@ -246,4 +247,59 @@ void CMFCBlackoutToolDoc::OnDeleteAll()
 		UpdateAllViews(NULL);
 	}
 	RemoveMouseMessage();
+}
+
+
+void CMFCBlackoutToolDoc::OnDirLoad()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+
+	BROWSEINFO BrInfo;
+	TCHAR szBuffer[512];                                      // 경로저장 버퍼 
+
+	::ZeroMemory(&BrInfo, sizeof(BROWSEINFO));
+	::ZeroMemory(szBuffer, 512);
+
+	BrInfo.hwndOwner = NULL;
+	BrInfo.lpszTitle = _T("파일이 저장될 폴더를 선택하세요");
+	BrInfo.ulFlags = BIF_NEWDIALOGSTYLE | BIF_EDITBOX | BIF_RETURNONLYFSDIRS;
+	LPITEMIDLIST pItemIdList = ::SHBrowseForFolder(&BrInfo);
+	::SHGetPathFromIDList(pItemIdList, szBuffer);				// 파일경로 읽어오기
+
+	CString dcmPath;
+	dcmPath.Format(_T("%s\\*.dcm"), szBuffer);
+
+
+
+	CListFormView *pView = (CListFormView*)((CMainFrame*)AfxGetMainWnd())->m_wndSplitter2.GetPane(1, 0);
+	pView->m_listDcm;
+
+
+	CFileFind finder;
+
+	// CFileFind는 파일, 디렉터리가 존재하면 TRUE 를 반환함
+	BOOL bWorking = finder.FindFile(dcmPath); //
+
+	CString fileName;
+	CString DirName;
+
+	int i = 0;
+	while (bWorking)
+	{
+		//다음 파일 or 폴더 가 존재하면다면 TRUE 반환
+		bWorking = finder.FindNextFile();
+
+		// folder 일 경우는 continue
+		if (finder.IsDirectory() || finder.IsDots())
+			continue;
+
+		fileName = finder.GetFileTitle();
+
+		CString tmp;
+		tmp.Format(_T("    %d"),i+1);
+		pView->m_listDcm.InsertItem(i, tmp);
+		pView->m_listDcm.SetItemText(i, 1, fileName);
+		i++;
+	}
+
 }

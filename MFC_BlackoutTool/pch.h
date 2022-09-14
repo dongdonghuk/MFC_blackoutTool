@@ -29,6 +29,7 @@
 #include <afxwin.h>
 #include <afxext.h>
 #include <afxwin.h>
+#include <afxext.h>
 #pragma comment(lib, "jsoncpp.lib")
 
 using namespace Gdiplus;

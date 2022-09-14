@@ -1,0 +1,27 @@
+{
+   "columns" : 760,
+   "count" : 2,
+   "manufacturer" : "HITACHIMEDICAL CORPORATION",
+   "model name" : "EUB-8500",
+   "rows" : 574,
+   "shapes" : [
+      {
+         "count" : 4,
+         "points" : [
+            [ 18, 16 ],
+            [ 18, 58 ],
+            [ 749, 58 ],
+            [ 749, 16 ]
+         ]
+      },
+      {
+         "count" : 4,
+         "points" : [
+            [ 21, 502 ],
+            [ 21, 560 ],
+            [ 745, 560 ],
+            [ 745, 502 ]
+         ]
+      }
+   ]
+}

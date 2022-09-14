@@ -46,15 +46,23 @@ void JsonFile::jsonSave(vector<CDraw>const &vCDraw, DicomImg const &dcmImg) {
 
 	std::ofstream stream;
 
-	CString filePath = dcmImg.m_dcmPath + _T(".json");
+	//CString filePath = dcmImg.m_dcmPath + _T(".json");
+	CString filePath;
+
+	filePath.Format(_T("preset\\%s_%s_%dx%d.json"), dcmImg.m_manufacturer, dcmImg.m_modelName,dcmImg.m_dcmImg.rows, dcmImg.m_dcmImg.cols);
+
+
 	stream.open(filePath);
 	stream << str;
 	stream.close();
 }
 
-void JsonFile::jsonLoad(vector<CDraw> &vCDraw, CString filePath) {
+void JsonFile::jsonLoad(vector<CDraw> &vCDraw, DicomImg const &dcmImg) {
 
-	filePath = filePath + _T(".json");
+	CString filePath;
+
+	filePath.Format(_T("preset\\%s_%s_%dx%d.json"), dcmImg.m_manufacturer, dcmImg.m_modelName, dcmImg.m_dcmImg.rows, dcmImg.m_dcmImg.cols);
+
 	std::ifstream json_file(filePath, std::ios::in);
 
 	if (!json_file.is_open()) return;

@@ -9,7 +9,7 @@ public:
 
 public:
 	void jsonSave(vector<CDraw>const &vCDraw, DicomImg const &dcmImg);
-	void jsonLoad(vector<CDraw> &vCDraw, CString filePath);
+	void jsonLoad(vector<CDraw> &vCDraw, DicomImg const &dcmImg);
 	BOOL isSaved(vector<CDraw> const &vCDraw, CString filePath);
 
 };

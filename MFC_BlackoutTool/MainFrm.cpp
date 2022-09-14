@@ -115,7 +115,7 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 		return FALSE;
 	}
 
-	if (!m_wndSplitter2.CreateStatic(&m_wndSplitter1, 3, 1, WS_CHILD | WS_VISIBLE | WS_BORDER, m_wndSplitter1.IdFromRowCol(0, 2)))
+	if (!m_wndSplitter2.CreateStatic(&m_wndSplitter1, 2, 1, WS_CHILD | WS_VISIBLE | WS_BORDER, m_wndSplitter1.IdFromRowCol(0, 2)))
 	{
 		//TRACE0("Fail to create splitter.\n");
 		return FALSE;
@@ -124,19 +124,19 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 	CRect rect;
 	GetClientRect(&rect);
 	m_wndSplitter2.CreateView(0, 0, RUNTIME_CLASS(CPresetFormView), CSize(0, 0), pContext);
-	m_wndSplitter2.CreateView(1, 0, RUNTIME_CLASS(CPresetFormView), CSize(0, 0), pContext);
-	m_wndSplitter2.CreateView(2, 0, RUNTIME_CLASS(CPresetFormView), CSize(0, 0), pContext);
+	m_wndSplitter2.CreateView(1, 0, RUNTIME_CLASS(CListFormView), CSize(0, 0), pContext);
+	//m_wndSplitter2.CreateView(2, 0, RUNTIME_CLASS(CPresetFormView), CSize(0, 0), pContext);
 	m_wndSplitter1.CreateView(0, 0, RUNTIME_CLASS(CBtnFormView), CSize(0, 0), pContext);
 	m_wndSplitter1.CreateView(0, 1, RUNTIME_CLASS(CMFCBlackoutToolView), CSize(0, 0), pContext);
 
 
-	m_wndSplitter1.SetColumnInfo(0, 100, 50);
-	m_wndSplitter1.SetColumnInfo(1, rect.right - 320, 50);
-	m_wndSplitter1.SetColumnInfo(2, 220, 50);
+	m_wndSplitter1.SetColumnInfo(0, 100, 0);
+	m_wndSplitter1.SetColumnInfo(1, rect.right - 400, 0);
+	m_wndSplitter1.SetColumnInfo(2, 300, 0);
 
-	m_wndSplitter2.SetRowInfo(0, 200, 100);
-	m_wndSplitter2.SetRowInfo(1, rect.bottom / 3, 100);
-	m_wndSplitter2.SetRowInfo(2, rect.bottom / 3, 100);
+	m_wndSplitter2.SetRowInfo(0, 200, 70);
+	m_wndSplitter2.SetRowInfo(1, rect.bottom / 2, 100);
+	//m_wndSplitter2.SetRowInfo(2, rect.bottom / 3, 100);
 
 	//RecalcLayout();
 
@@ -160,13 +160,14 @@ void CMainFrame::OnSize(UINT nType, int cx, int cy)
 	CRect rect;
 	GetClientRect(&rect);
 
-	m_wndSplitter1.SetColumnInfo(0, 100, 50);
-	m_wndSplitter1.SetColumnInfo(1, rect.right - 320, 50);
-	m_wndSplitter1.SetColumnInfo(2, 220, 50);
 
-	m_wndSplitter2.SetRowInfo(0, 200, 100);
-	m_wndSplitter2.SetRowInfo(1, rect.bottom / 3, 100);
-	m_wndSplitter2.SetRowInfo(2, rect.bottom / 3, 100);
+	m_wndSplitter1.SetColumnInfo(0, 100, 0);
+	m_wndSplitter1.SetColumnInfo(1, rect.right - 400, 0);
+	m_wndSplitter1.SetColumnInfo(2, 300, 0);
+
+	m_wndSplitter2.SetRowInfo(0, 200, 70);
+	m_wndSplitter2.SetRowInfo(1, rect.bottom / 2, 100);
+	//m_wndSplitter2.SetRowInfo(2, rect.bottom / 3, 100);
 
 	RecalcLayout();
 

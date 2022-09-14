@@ -6,6 +6,7 @@
 #include "CFixedSplitterWnd.h"
 #include "CBtnFormView.h"
 #include "CPresetFormView.h"
+#include "CListFormView.h"
 
 
 class CMainFrame : public CFrameWnd

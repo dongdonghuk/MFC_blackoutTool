@@ -8,9 +8,13 @@
 #define IDR_MFCBlackoutToolTYPE         130
 #define IDD_CBtnFormView                310
 #define IDD_CPresetFormView             311
+#define IDD_CListFormView               313
 #define IDC_DCM_MANUFACTURER            1004
 #define IDC_DCM_MODEL                   1007
 #define IDC_DCM_SIZE                    1008
+#define IDM_DCM_PREV                    1010
+#define IDM_DIR_LOAD                    1011
+#define IDC_DCM_LIST                    1012
 #define ID_DICOM_LOAD                   32771
 #define IDM_DICOM_LOAD                  32772
 #define ID_DRAW_RECTANGLE               32773
@@ -24,17 +28,21 @@
 #define ID_DICOM_SAVE                   32781
 #define IDM_JSON_SAVE                   32782
 #define ID_DELETE_UNDO                  32783
+#define IDM_DCM_NEXT                    32783
 #define ID_DELETE_ALL                   32784
 #define IDM_DELETE_UNDO                 32785
 #define IDM_DELETE_ALL                  32786
+#define ID_DICOM_NEXT                   32787
+#define ID_DICOM_PREV                   32788
+#define ID_DICOM_DIRLOAD                32789
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        313
-#define _APS_NEXT_COMMAND_VALUE         32787
-#define _APS_NEXT_CONTROL_VALUE         1010
-#define _APS_NEXT_SYMED_VALUE           313
+#define _APS_NEXT_RESOURCE_VALUE        314
+#define _APS_NEXT_COMMAND_VALUE         32790
+#define _APS_NEXT_CONTROL_VALUE         1013
+#define _APS_NEXT_SYMED_VALUE           314
 #endif
 #endif
