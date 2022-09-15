@@ -28,6 +28,7 @@ void CListFormView::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CListFormView, CFormView)
 //	ON_WM_INITMENU()
+ON_NOTIFY(NM_CLICK, IDC_DCM_LIST, &CListFormView::OnNMClickDcmList)
 END_MESSAGE_MAP()
 
 
@@ -60,4 +61,25 @@ void CListFormView::OnInitialUpdate()
 
 	m_listDcm.InsertColumn(0, _T("No"), LVCFMT_CENTER, 50);
 	m_listDcm.InsertColumn(1, _T("Name"), LVCFMT_LEFT, 200);
+}
+
+
+void CListFormView::OnNMClickDcmList(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	// 행 클릭시 행 넘버값 받아오기
+	//NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+	//int idx = pNMListView->iItem;
+
+	//// 선택된 아이템값의 아이템을 (0,1 ... n 번째 인덱스) 한개 가져온다.
+	//CString sIndexValue;
+
+	//sIndexValue = m_listDcm.GetItemText(idx, 1);
+	//AfxMessageBox(sIndexValue);
+
+	//UpdateWindow();
+
+	*pResult = 0;
 }

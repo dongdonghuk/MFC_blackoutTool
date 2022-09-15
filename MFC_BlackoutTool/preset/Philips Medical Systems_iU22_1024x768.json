@@ -1,0 +1,27 @@
+{
+   "columns" : 1024,
+   "count" : 2,
+   "manufacturer" : "Philips Medical Systems",
+   "model name" : "iU22",
+   "rows" : 768,
+   "shapes" : [
+      {
+         "count" : 4,
+         "points" : [
+            [ 13, 8 ],
+            [ 13, 71 ],
+            [ 991, 71 ],
+            [ 991, 8 ]
+         ]
+      },
+      {
+         "count" : 4,
+         "points" : [
+            [ 118, 270 ],
+            [ 118, 76 ],
+            [ 10, 76 ],
+            [ 10, 270 ]
+         ]
+      }
+   ]
+}

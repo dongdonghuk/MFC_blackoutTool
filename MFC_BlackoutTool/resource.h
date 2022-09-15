@@ -30,18 +30,21 @@
 #define ID_DELETE_UNDO                  32783
 #define IDM_DCM_NEXT                    32783
 #define ID_DELETE_ALL                   32784
+#define IDM_JSON_SAVE2                  32784
 #define IDM_DELETE_UNDO                 32785
 #define IDM_DELETE_ALL                  32786
 #define ID_DICOM_NEXT                   32787
 #define ID_DICOM_PREV                   32788
 #define ID_DICOM_DIRLOAD                32789
+#define ID_DICOM_ERASE                  32793
+#define IDM_DCM_ERASE                   32794
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        314
-#define _APS_NEXT_COMMAND_VALUE         32790
+#define _APS_NEXT_COMMAND_VALUE         32795
 #define _APS_NEXT_CONTROL_VALUE         1013
 #define _APS_NEXT_SYMED_VALUE           314
 #endif

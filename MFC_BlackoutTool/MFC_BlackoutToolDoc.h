@@ -69,4 +69,5 @@ public:
 	afx_msg void OnDirLoad();
 	afx_msg void OnDcmNext();
 	afx_msg void OnDcmPrev();
+	afx_msg void OnDcmErase();
 };

@@ -29,8 +29,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CListCtrl m_listDcm;
-//	afx_msg void OnInitMenu(CMenu* pMenu);
+
 	virtual void OnInitialUpdate();
+	afx_msg void OnNMClickDcmList(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 

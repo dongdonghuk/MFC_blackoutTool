@@ -148,35 +148,16 @@ void CMFCBlackoutToolView::OnLButtonDown(UINT nFlags, CPoint point)
 	if (!(pDoc->m_dcmImg.empty())) {
 		if (pDoc->m_nDrawType == IDM_DRAW_RECT) {
 
-			//SetCapture();
-
-			CRect  rc;
-			POINT p1, p2;
-
-			GetClientRect(&rc);    // 클라이언트 크기
-
-			// 클라이언트 크기를 좌표로 변환
-			p1.x = rc.left;
-			p1.y = rc.top;
-			p2.x = rc.right;
-			p2.y = rc.bottom;
-
-			// 클라이언트 크기를 스크린 크기로 변환
-			ClientToScreen(&p1);
-			ClientToScreen(&p2);
-
-			rc.left = p1.x;
-			rc.top = p1.y;
-			rc.right = p2.x;
-			rc.bottom = p2.y;
-
-			//해당 좌표를 기준으로 커서를 고정
-			ClipCursor(&rc);
-
+			SetCapture();
 
 			point.x = (point.x - pDoc->m_dcmImg.m_pt.x) / (pDoc->m_dcmImg.m_dAligmentRate);
 			point.y = (point.y - pDoc->m_dcmImg.m_pt.y) / (pDoc->m_dcmImg.m_dAligmentRate);
 
+			point.x = (point.x > 0) ? point.x : 0;
+			point.y = (point.y > 0) ? point.y : 0;
+
+			point.x = (point.x < pDoc->m_dcmImg.m_dcmImg.cols) ? point.x : pDoc->m_dcmImg.m_dcmImg.cols;
+			point.y = (point.y < pDoc->m_dcmImg.m_dcmImg.rows) ? point.y : pDoc->m_dcmImg.m_dcmImg.rows;
 
 			pDoc->m_drawTmp.m_nType = 1;
 
@@ -187,6 +168,8 @@ void CMFCBlackoutToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
 		}
 	}
+
+	
 
 	CView::OnLButtonDown(nFlags, point);
 }
@@ -204,13 +187,19 @@ void CMFCBlackoutToolView::OnLButtonUp(UINT nFlags, CPoint point)
 			point.x = (point.x - pDoc->m_dcmImg.m_pt.x) / (pDoc->m_dcmImg.m_dAligmentRate);
 			point.y = (point.y - pDoc->m_dcmImg.m_pt.y) / (pDoc->m_dcmImg.m_dAligmentRate);
 
+			point.x = (point.x > 0) ? point.x : 0;
+			point.y = (point.y > 0) ? point.y : 0;
+
+			point.x = (point.x < pDoc->m_dcmImg.m_dcmImg.cols) ? point.x : pDoc->m_dcmImg.m_dcmImg.cols;
+			point.y = (point.y < pDoc->m_dcmImg.m_dcmImg.rows) ? point.y : pDoc->m_dcmImg.m_dcmImg.rows;
+
 			pDoc->m_drawTmp.m_vPoint[2] = (Gdiplus::Point(point.x, point.y));
 
 			pDoc->m_vCdraw.push_back(pDoc->m_drawTmp);
 			pDoc->m_drawTmp.m_vPoint.clear();
 			pDoc->m_drawTmp.m_nType = 0;
 
-			//ReleaseCapture();
+			ReleaseCapture();
 			ClipCursor(NULL);
 		}
 		Invalidate(false);
@@ -227,6 +216,12 @@ void CMFCBlackoutToolView::OnMouseMove(UINT nFlags, CPoint point)
 		if (pDoc->m_nDrawType == IDM_DRAW_RECT && ((nFlags & MK_LBUTTON) == MK_LBUTTON) && pDoc->m_drawTmp.m_nType) {
 			point.x = (point.x - pDoc->m_dcmImg.m_pt.x) / (pDoc->m_dcmImg.m_dAligmentRate);
 			point.y = (point.y - pDoc->m_dcmImg.m_pt.y) / (pDoc->m_dcmImg.m_dAligmentRate);
+
+			point.x = (point.x > 0) ? point.x : 0;
+			point.y = (point.y > 0) ? point.y : 0;
+
+			point.x = (point.x < pDoc->m_dcmImg.m_dcmImg.cols) ? point.x : pDoc->m_dcmImg.m_dcmImg.cols;
+			point.y = (point.y < pDoc->m_dcmImg.m_dcmImg.rows) ? point.y : pDoc->m_dcmImg.m_dcmImg.rows;
 
 			pDoc->m_drawTmp.m_vPoint[2] = (Gdiplus::Point(point.x, point.y));
 			Invalidate(FALSE);

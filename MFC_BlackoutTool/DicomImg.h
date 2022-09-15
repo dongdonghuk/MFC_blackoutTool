@@ -1,5 +1,5 @@
 #pragma once
-
+#include "CDraw.h"
 
 class DicomImg
 {
@@ -26,7 +26,7 @@ public:
 	void dcmRead(CString filePath, CString fileName);
 	void DrawImage(Graphics& g, Graphics& memDC, CWnd* cwnd);
 	BOOL empty();
-
+	void erase(vector<CDraw> &vCdraw);
 
 };
 

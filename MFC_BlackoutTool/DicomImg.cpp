@@ -149,3 +149,53 @@ BOOL DicomImg::empty() {
 }
 
 
+void DicomImg::erase(vector<CDraw> &vCdraw) {
+
+	for (auto cdraw : vCdraw) {
+		cv::Rect rectRoi(cv::Point(cdraw.m_vPoint[0].X, cdraw.m_vPoint[0].Y), cv::Point(cdraw.m_vPoint[2].X, cdraw.m_vPoint[2].Y));
+		Mat matRoi = m_dcmImg(rectRoi);
+		matRoi.setTo(Scalar(0, 0, 0));
+	}
+
+
+
+	//DJDecoderRegistration::registerCodecs();
+	//DcmFileFormat DcmFileFormat;
+	//OFCondition cond = DcmFileFormat.loadFile(std::string(CT2CA(m_dcmPath)).c_str());
+	//DcmDataset* dataset = DcmFileFormat.getDataset();
+	//E_TransferSyntax xfer = dataset->getOriginalXfer();
+
+	//if (cond.good()) {
+	//	//AfxMessageBox(_T("DCM파일 로드성공"));
+	//}
+
+	//else if (cond.bad()) {
+	//	AfxMessageBox(_T("DCM파일 로드실패 : ") + CString(cond.text()));
+	//	return;
+	//}
+	////m_nFrame = m_ptrDicomImage->getFrameCount();
+
+	//OFString strColorType;
+	//dataset->findAndGetOFString(DCM_PhotometricInterpretation, strColorType);
+
+	//Mat matTmp;
+
+	//// grayscale
+	//if (strColorType == "MONOCHROME1" || strColorType == "MONOCHROME2") {
+	//	cvtColor(m_dcmImg, matTmp, COLOR_BGRA2GRAY);
+	//}
+
+	//// true color
+	//else if (strColorType == "PALETTE COLOR" || strColorType == "RGB") {
+	//	cvtColor(m_dcmImg, matTmp, COLOR_BGRA2RGB);
+	//}
+	////YBR color type은 미처리
+
+	//imshow("test", matTmp);
+
+	//dataset->putAndInsertUint8Array(DCM_PixelData, matTmp.data, matTmp.rows*matTmp.cols*matTmp.channels());
+
+	//DJDecoderRegistration::cleanup();
+
+}
+

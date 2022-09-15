@@ -32,6 +32,7 @@ BEGIN_MESSAGE_MAP(CMFCBlackoutToolDoc, CDocument)
 	ON_COMMAND(IDM_DIR_LOAD, &CMFCBlackoutToolDoc::OnDirLoad)
 	ON_COMMAND(IDM_DCM_NEXT, &CMFCBlackoutToolDoc::OnDcmNext)
 	ON_COMMAND(IDM_DCM_PREV, &CMFCBlackoutToolDoc::OnDcmPrev)
+	ON_COMMAND(IDM_DCM_ERASE, &CMFCBlackoutToolDoc::OnDcmErase)
 END_MESSAGE_MAP()
 
 
@@ -157,6 +158,10 @@ void CMFCBlackoutToolDoc::OnDicomLoad()
 	CFileDialog dlg(TRUE, NULL, NULL, OFN_HIDEREADONLY, szFilter);
 
 	if (IDOK == dlg.DoModal()) {
+
+		CListFormView *pListView = (CListFormView*)((CMainFrame*)AfxGetMainWnd())->m_wndSplitter2.GetPane(1, 0);
+
+		pListView->m_listDcm.DeleteAllItems();
 
 		m_vCdraw.clear();
 		//m_nDrawType = IDM_DRAW_MOUSE;
@@ -383,4 +388,13 @@ void CMFCBlackoutToolDoc::OnDcmPrev()
 		pPrestView->UpdateData(FALSE);
 		UpdateAllViews(NULL);
 	}
+}
+
+
+void CMFCBlackoutToolDoc::OnDcmErase()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	m_dcmImg.erase(m_vCdraw);
+	m_vCdraw.clear();
+	UpdateAllViews(NULL);
 }
