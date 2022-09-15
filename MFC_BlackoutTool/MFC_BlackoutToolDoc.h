@@ -27,6 +27,7 @@ public:
 	JsonFile m_jsonFile;
 
 	int m_nDrawType;
+	CString m_strDir;
 
 public:
 	BOOL RemoveMouseMessage();
@@ -66,4 +67,6 @@ public:
 	afx_msg void OnDeleteUndo();
 	afx_msg void OnDeleteAll();
 	afx_msg void OnDirLoad();
+	afx_msg void OnDcmNext();
+	afx_msg void OnDcmPrev();
 };

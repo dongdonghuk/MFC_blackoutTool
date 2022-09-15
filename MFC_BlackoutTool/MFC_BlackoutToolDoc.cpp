@@ -30,6 +30,8 @@ BEGIN_MESSAGE_MAP(CMFCBlackoutToolDoc, CDocument)
 	ON_COMMAND(IDM_DELETE_UNDO, &CMFCBlackoutToolDoc::OnDeleteUndo)
 	ON_COMMAND(IDM_DELETE_ALL, &CMFCBlackoutToolDoc::OnDeleteAll)
 	ON_COMMAND(IDM_DIR_LOAD, &CMFCBlackoutToolDoc::OnDirLoad)
+	ON_COMMAND(IDM_DCM_NEXT, &CMFCBlackoutToolDoc::OnDcmNext)
+	ON_COMMAND(IDM_DCM_PREV, &CMFCBlackoutToolDoc::OnDcmPrev)
 END_MESSAGE_MAP()
 
 
@@ -151,17 +153,6 @@ void CMFCBlackoutToolDoc::OnDicomLoad()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 
-
-	//if ((m_jsonFile.isSaved(m_vCdraw, m_dcmImg.m_dcmPath) == FALSE) && (m_dcmImg.empty() == FALSE))
-	//{
-	//	AfxMessageBox(_T("test"));
-
-	//	if (IDYES == AfxMessageBox(_T("저장하시겠습니까?"), MB_YESNO)) {
-	//		AfxMessageBox(_T("test"));
-	//	}
-	//}
-
-
 	TCHAR szFilter[] = _T("Dicom(*.dcm)|*.dcm|");
 	CFileDialog dlg(TRUE, NULL, NULL, OFN_HIDEREADONLY, szFilter);
 
@@ -179,7 +170,7 @@ void CMFCBlackoutToolDoc::OnDicomLoad()
 
 		pView->m_strManufacturer = m_dcmImg.m_manufacturer;
 		pView->m_strModel = m_dcmImg.m_modelName;
-		pView->m_strSize.Format(_T("%d x %d"), m_dcmImg.m_dcmImg.rows, m_dcmImg.m_dcmImg.cols);
+		pView->m_strSize.Format(_T("%d x %d"), m_dcmImg.m_dcmImg.cols, m_dcmImg.m_dcmImg.rows);
 
 		pView->UpdateData(FALSE);
 
@@ -270,10 +261,9 @@ void CMFCBlackoutToolDoc::OnDirLoad()
 	dcmPath.Format(_T("%s\\*.dcm"), szBuffer);
 
 
+	CListFormView *pListView = (CListFormView*)((CMainFrame*)AfxGetMainWnd())->m_wndSplitter2.GetPane(1, 0);
 
-	CListFormView *pView = (CListFormView*)((CMainFrame*)AfxGetMainWnd())->m_wndSplitter2.GetPane(1, 0);
-	pView->m_listDcm;
-
+	pListView->m_listDcm.DeleteAllItems();
 
 	CFileFind finder;
 
@@ -281,7 +271,7 @@ void CMFCBlackoutToolDoc::OnDirLoad()
 	BOOL bWorking = finder.FindFile(dcmPath); //
 
 	CString fileName;
-	CString DirName;
+
 
 	int i = 0;
 	while (bWorking)
@@ -294,12 +284,103 @@ void CMFCBlackoutToolDoc::OnDirLoad()
 			continue;
 
 		fileName = finder.GetFileTitle();
+		m_strDir = finder.GetRoot();
 
 		CString tmp;
+
 		tmp.Format(_T("    %d"),i+1);
-		pView->m_listDcm.InsertItem(i, tmp);
-		pView->m_listDcm.SetItemText(i, 1, fileName);
+		pListView->m_listDcm.InsertItem(i, tmp);
+		pListView->m_listDcm.SetItemText(i, 1, fileName);
 		i++;
 	}
 
+	pListView->m_listDcm.SetSelectionMark(0);
+	pListView->m_listDcm.SetItemState(0, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
+	pListView->m_listDcm.SetFocus();
+
+
+	m_vCdraw.clear();
+
+	fileName = pListView->m_listDcm.GetItemText(pListView->m_listDcm.GetSelectionMark(), 1);
+
+	m_dcmImg.dcmRead(m_strDir + fileName + _T(".dcm"), fileName);
+
+	m_jsonFile.jsonLoad(m_vCdraw, m_dcmImg);
+
+	CPresetFormView *pPrestView = (CPresetFormView*)((CMainFrame*)AfxGetMainWnd())->m_wndSplitter2.GetPane(0, 0);
+
+	pPrestView->m_strManufacturer = m_dcmImg.m_manufacturer;
+	pPrestView->m_strModel = m_dcmImg.m_modelName;
+	pPrestView->m_strSize.Format(_T("%d x %d"), m_dcmImg.m_dcmImg.cols, m_dcmImg.m_dcmImg.rows);
+
+	pPrestView->UpdateData(FALSE);
+	UpdateAllViews(NULL);
+}
+
+
+void CMFCBlackoutToolDoc::OnDcmNext()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CListFormView *pListView = (CListFormView*)((CMainFrame*)AfxGetMainWnd())->m_wndSplitter2.GetPane(1, 0);
+
+	int nSelect = pListView->m_listDcm.GetSelectionMark();
+
+	pListView->m_listDcm.SetItemState(-1, 0, LVIS_SELECTED | LVIS_FOCUSED);
+	pListView->m_listDcm.SetSelectionMark(nSelect + 1);
+	pListView->m_listDcm.SetItemState(nSelect + 1, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
+	pListView->m_listDcm.SetFocus();
+
+	m_vCdraw.clear();
+
+	CString fileName;
+
+	fileName = pListView->m_listDcm.GetItemText(pListView->m_listDcm.GetSelectionMark(), 1);
+
+	m_dcmImg.dcmRead(m_strDir + fileName + _T(".dcm"), fileName);
+
+	m_jsonFile.jsonLoad(m_vCdraw, m_dcmImg);
+
+	CPresetFormView *pPrestView = (CPresetFormView*)((CMainFrame*)AfxGetMainWnd())->m_wndSplitter2.GetPane(0, 0);
+
+	pPrestView->m_strManufacturer = m_dcmImg.m_manufacturer;
+	pPrestView->m_strModel = m_dcmImg.m_modelName;
+	pPrestView->m_strSize.Format(_T("%d x %d"), m_dcmImg.m_dcmImg.cols, m_dcmImg.m_dcmImg.rows);
+
+	pPrestView->UpdateData(FALSE);
+	UpdateAllViews(NULL);
+}
+
+
+void CMFCBlackoutToolDoc::OnDcmPrev()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CListFormView *pListView = (CListFormView*)((CMainFrame*)AfxGetMainWnd())->m_wndSplitter2.GetPane(1, 0);
+
+	int nSelect = pListView->m_listDcm.GetSelectionMark();
+
+	pListView->m_listDcm.SetItemState(-1, 0, LVIS_SELECTED | LVIS_FOCUSED);
+	pListView->m_listDcm.SetSelectionMark(nSelect - 1);
+	pListView->m_listDcm.SetItemState(nSelect - 1, LVIS_SELECTED | LVIS_FOCUSED, LVIS_SELECTED | LVIS_FOCUSED);
+	pListView->m_listDcm.SetFocus();
+
+	if (nSelect > 0) {
+		m_vCdraw.clear();
+
+		CString fileName;
+
+		fileName = pListView->m_listDcm.GetItemText(pListView->m_listDcm.GetSelectionMark(), 1);
+
+		m_dcmImg.dcmRead(m_strDir + fileName + _T(".dcm"), fileName);
+
+		m_jsonFile.jsonLoad(m_vCdraw, m_dcmImg);
+
+		CPresetFormView *pPrestView = (CPresetFormView*)((CMainFrame*)AfxGetMainWnd())->m_wndSplitter2.GetPane(0, 0);
+
+		pPrestView->m_strManufacturer = m_dcmImg.m_manufacturer;
+		pPrestView->m_strModel = m_dcmImg.m_modelName;
+		pPrestView->m_strSize.Format(_T("%d x %d"), m_dcmImg.m_dcmImg.cols, m_dcmImg.m_dcmImg.rows);
+
+		pPrestView->UpdateData(FALSE);
+		UpdateAllViews(NULL);
+	}
 }

@@ -51,19 +51,6 @@ void CListFormView::Dump(CDumpContext& dc) const
 // CListFormView 메시지 처리기
 
 
-
-
-
-//void CListFormView::OnInitMenu(CMenu* pMenu)
-//{
-//	CFormView::OnInitMenu(pMenu);
-//
-//	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
-//	m_listDcm.InsertColumn(0, _T("No"), LVCFMT_CENTER, 200);
-//
-//}
-
-
 void CListFormView::OnInitialUpdate()
 {
 	CFormView::OnInitialUpdate();

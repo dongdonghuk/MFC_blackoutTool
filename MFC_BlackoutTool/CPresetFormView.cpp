@@ -32,7 +32,6 @@ void CPresetFormView::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CPresetFormView, CFormView)
-//	ON_COMMAND(IDM_DICOM_LOAD, &CPresetFormView::OnDicomLoad)
 END_MESSAGE_MAP()
 
 
@@ -50,11 +49,7 @@ void CPresetFormView::Dump(CDumpContext& dc) const
 	CFormView::Dump(dc);
 }
 
-//CMFCBlackoutToolDoc* CPresetFormView::GetDocument() const // 디버그되지 않은 버전은 인라인으로 지정됩니다.
-//{
-//	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CMFCBlackoutToolDoc)));
-//	return (CMFCBlackoutToolDoc*)m_pDocument;
-//}
+
 
 #endif
 #endif //_DEBUG
